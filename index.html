@@ -66,17 +66,15 @@
     </div>
 </div>
 
-
         <div class="flex gap-2 overflow-x-auto category-scroll pb-2">
             <button onclick="filterCat('All')" class="cat-chip bg-red-600 border-none font-bold">সবগুলো</button>
             <button onclick="filterCat('নিউজ')" class="cat-chip bg-zinc-900">নিউজ</button>
-            <button onclick="filterCat('ওয়াজ ')" class="cat-chip bg-zinc-900">ওয়াজ </button>
+            <button onclick="filterCat('ওয়াজ ')" class="cat-chip bg-zinc-900">ওয়াজ </button>
             <button onclick="filterCat('সুরা')" class="cat-chip bg-zinc-900">সুরা</button>
-            <button onclick="filterCat('দুয়া ')" class="cat-chip bg-zinc-900">দুয়া </button>
+            <button onclick="filterCat('দুয়া ')" class="cat-chip bg-zinc-900">দুয়া </button>
             <button onclick="filterCat('ইসলামের ইতিহাস')" class="cat-chip bg-zinc-900">ইসলামের ইতিহাস</button>
             <button onclick="filterCat('লেকচার ')" class="cat-chip bg-zinc-900">লেকচার </button>
             <button onclick="filterCat('অন্যান্য')" class="cat-chip bg-zinc-900">অন্যান্য </button>
-
         </div>
     </nav>
 
@@ -97,15 +95,22 @@
                     <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg" class="w-4"> Google দিয়ে লগইন
                 </button>
                 <input id="email" type="email" placeholder="ইমেইল" class="w-full bg-black p-3 rounded-xl outline-none text-sm border border-white/5">
-                <input id="password" type="password" placeholder="পাসওয়ার্ড" class="w-full bg-black p-3 rounded-xl outline-none text-sm border border-white/5">
-                <button onclick="login()" class="w-full bg-red-600 py-3 rounded-xl font-bold">লগইন</button>
-                <button onclick="signup()" class="w-full text-gray-400 text-xs">অ্যাকাউন্ট নেই? সাইন আপ করুন</button>
+                
+                <div class="relative">
+                    <input id="password" type="password" placeholder="পাসওয়ার্ড" class="w-full bg-black p-3 rounded-xl outline-none text-sm border border-white/5 pr-10">
+                    <i id="toggleEye" onclick="togglePass()" class="fas fa-eye-slash absolute right-3 top-3.5 text-gray-500 cursor-pointer"></i>
+                </div>
+
+                <div class="flex gap-2">
+                    <button onclick="login()" class="flex-1 bg-red-600 py-3 rounded-xl font-bold">লগইন</button>
+                    <button onclick="signup()" class="flex-1 bg-zinc-800 py-3 rounded-xl font-bold">সাইন আপ</button>
+                </div>
             </div>
             <button onclick="toggleModal('authModal')" class="mt-4 text-gray-600 text-xs">বন্ধ করুন</button>
         </div>
     </div>
 
-   <div id="historyModal" class="modal p-6">
+    <div id="historyModal" class="modal p-6">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-xl font-bold text-red-600 font-brand">ABOUT US</h2>
         <i onclick="toggleModal('historyModal')" class="fas fa-times text-xl p-2 cursor-pointer"></i>
@@ -160,7 +165,8 @@
         <p class="text-[10px] text-center text-gray-600 mt-6">UmmahTube Inc. All Rights Reserved.</p>
     </div>
 </div>
-  <div id="downloadModal" class="modal items-center justify-center p-6">
+
+    <div id="downloadModal" class="modal items-center justify-center p-6">
     <div class="bg-zinc-900 w-full max-w-sm rounded-3xl p-6 border border-white/10 shadow-2xl">
         
         <div class="flex justify-between items-center mb-6">
@@ -182,7 +188,7 @@
     </div>
 </div>
    
-   <div id="playerModal" class="modal">
+    <div id="playerModal" class="modal">
     <div class="w-full h-full flex flex-col">
         <div class="p-3 flex justify-between items-center bg-black">
             <i onclick="closePlayer()" class="fas fa-times text-xl p-2 cursor-pointer"></i>
@@ -193,7 +199,7 @@
         <div id="playerFrame" class="w-full aspect-video bg-zinc-900 flex items-center justify-center">
             </div>
         
-        <div class="p-5 flex-1 bg-black">
+        <div class="p-5 flex-1 bg-black overflow-y-auto">
             <h2 id="playingTitle" class="text-lg font-bold mb-4 text-white"></h2>
             
             <div class="flex flex-col gap-4">
@@ -202,6 +208,12 @@
                     <span id="btnText" class="text-xs font-semibold text-gray-300">Copy Video Link</span>
                 </button>
                 <p id="copyStatus" class="text-[10px] text-green-500 opacity-0 transition-opacity">লিঙ্ক কপি হয়েছে!</p>
+
+                <div class="mt-4 w-full h-24 relative group">
+                    <a id="playerAdLink" href="#" target="_blank" class="block w-full h-full bg-zinc-900 rounded-xl overflow-hidden border border-white/10">
+                        <img id="playerAdImg" src="https://via.placeholder.com/800x200?text=Promote+Your+Brand" class="w-full h-full object-cover">
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -220,13 +232,11 @@
             <input id="ytTitle" type="text" placeholder="শিরোনাম" class="w-full bg-black p-3 rounded-xl outline-none border border-white/5">
             <select id="ytCat" class="w-full bg-black p-3 rounded-xl outline-none border border-white/5 text-gray-400">
                 <option value="নিউজ">নিউজ</option>
-                <option value="ওয়াজ ">ওয়াজ </option>
+                <option value="ওয়াজ ">ওয়াজ </option>
                 <option value="সুরা">সুরা</option>
-                <option value="দুয়া ">দুয়া </option>
+                <option value="দুয়া ">দুয়া </option>
                 <option value="লেকচার ">লেকচার </option>
-                <option value="ইসলামের ইতিহাস
- ">ইসলামের ইতিহাস
- </option>                               
+                <option value="ইসলামের ইতিহাস">ইসলামের ইতিহাস</option>                                
                 <option value="অন্যান্য">অন্যান্য</option>
             </select>
             <input id="uploadPass" type="password" placeholder="আপলোড পাসওয়ার্ড দিন" class="w-full bg-black p-3 rounded-xl outline-none border border-white/5">
@@ -244,7 +254,7 @@
     <div class="fixed bottom-0 w-full glass-nav flex justify-around py-4 border-t border-white/5">
         <i onclick="filterCat('All')" class="fas fa-home text-lg text-red-600"></i>
         <i onclick="toggleModal('historyModal')" class="fas fa-info-circle text-lg text-gray-600"></i>
-<i onclick="toggleModal('uploadModal')" class="fas fa-plus-circle text-2xl text-white -mt-1"></i>
+        <i onclick="toggleModal('uploadModal')" class="fas fa-plus-circle text-2xl text-white -mt-1"></i>
         <i id="adminLockBtn" onclick="adminLogin()" class="fas fa-key text-lg text-gray-600 cursor-pointer"></i>
         <i onclick="toggleModal('downloadModal')" class="fas fa-arrow-circle-down text-2xl text-gray-600 cursor-pointer hover:text-red-600 transition-all"></i>
     </div>
@@ -255,9 +265,8 @@
         let isAdmin = false;
         let currentUser = null;
 
-        // Firebase Setup
         const firebaseConfig = {
-            apiKey: "AIzaSyD7U3uradoCjSlFA5HwjMeVO fQSTPvLui0",
+            apiKey: "AIzaSyD7U3uradoCjSlFA5HwjMeVOfQSTPvLui0",
             authDomain: "all-site-31c1b.firebaseapp.com",
             databaseURL: "https://all-site-31c1b-default-rtdb.firebaseio.com/",
             projectId: "all-site-31c1b",
@@ -273,7 +282,6 @@
         let allVideos = [];
         let favorites = JSON.parse(localStorage.getItem('sx_fav_slim')) || [];
 
-        // Auth State Handler
         auth.onAuthStateChanged(user => {
             currentUser = user;
             const fields = document.getElementById('authFields');
@@ -284,61 +292,68 @@
                 document.getElementById('userNameDisplay').innerText = user.displayName || user.email;
                 document.getElementById('userImg').src = user.photoURL || 'https://ui-avatars.com/api/?name='+user.email;
                 userBtn.innerHTML = `<img src="${user.photoURL || 'https://ui-avatars.com/api/?name='+user.email}" class="w-full h-full">`;
-                loadHistory();
             } else {
                 fields.classList.remove('hidden'); info.classList.add('hidden');
                 userBtn.innerHTML = `<i class="fas fa-user text-[10px]"></i>`;
             }
         });
 
-        // Admin Logic (ভিডিও ডিলিট করার জন্য)
+        function togglePass() {
+            const p = document.getElementById('password');
+            const eye = document.getElementById('toggleEye');
+            if(p.type === 'password') {
+                p.type = 'text';
+                eye.classList.replace('fa-eye-slash', 'fa-eye');
+            } else {
+                p.type = 'password';
+                eye.classList.replace('fa-eye', 'fa-eye-slash');
+            }
+        }
+
+        async function googleLogin() { try { await auth.signInWithPopup(googleProvider); toggleModal('authModal'); } catch(e) { alert(e.message); } }
+        async function login() { 
+            const e = document.getElementById('email').value, p = document.getElementById('password').value; 
+            try { await auth.signInWithEmailAndPassword(e, p); toggleModal('authModal'); } catch(e) { alert("লগইন ভুল: " + e.message); } 
+        }
+        async function signup() { 
+            const e = document.getElementById('email').value, p = document.getElementById('password').value; 
+            try { await auth.createUserWithEmailAndPassword(e, p); alert("অ্যাকাউন্ট তৈরি হয়েছে!"); toggleModal('authModal'); } catch(e) { alert("ভুল: " + e.message); } 
+        }
+        function logout() { auth.signOut(); }
+
         function adminLogin() {
             const pass = prompt("অ্যাডমিন পাসওয়ার্ড দিন:");
             if(pass === ADMIN_PASS) {
                 isAdmin = true;
                 document.getElementById('adminLockBtn').style.color = "#ff0000";
                 renderVideos(allVideos);
-                alert("অ্যাডমিন মোড চালু! এখন ভিডিওর ওপর ডিলিট বাটন পাবেন।");
+                alert("অ্যাডমিন মোড চালু!");
             } else { alert("ভুল পাসওয়ার্ড!"); }
         }
 
-        // Firebase Functions
-        async function googleLogin() { try { await auth.signInWithPopup(googleProvider); toggleModal('authModal'); } catch(e) { alert(e.message); } }
-        async function login() { const e = document.getElementById('email').value, p = document.getElementById('password').value; try { await auth.signInWithEmailAndPassword(e, p); toggleModal('authModal'); } catch(e) { alert(e.message); } }
-        async function signup() { const e = document.getElementById('email').value, p = document.getElementById('password').value; try { await auth.createUserWithEmailAndPassword(e, p); alert("তৈরি হয়েছে!"); } catch(e) { alert(e.message); } }
-        function logout() { auth.signOut(); }
+        // Firebase Sync for Ad in both places
+        db.ref('activeAd').on('value', (snapshot) => {
+            const adData = snapshot.val();
+            if (adData) {
+                // Top Nav Ad
+                document.getElementById('adDisplayImg').src = adData.img;
+                document.getElementById('adLink').href = adData.link;
+                // Player Modal Ad
+                document.getElementById('playerAdImg').src = adData.img;
+                document.getElementById('playerAdLink').href = adData.link;
+            }
+        });
 
-// ১. ডাটাবেস থেকে অ্যাড লোড করার কোড (এটি স্ক্রিপ্টের ভেতরে যেকোনো জায়গায় দিলেই হবে)
-db.ref('activeAd').on('value', (snapshot) => {
-    const adData = snapshot.val();
-    if (adData) {
-        document.getElementById('adDisplayImg').src = adData.img;
-        document.getElementById('adLink').href = adData.link;
-    }
-});
-
-// ২. পাসওয়ার্ড দিয়ে অ্যাড পরিবর্তন করার ফাংশন
-function secureAdUpdate() {
-    const pass = prompt("অ্যাডমিন পাসওয়ার্ড দিন:");
-    
-    if (pass === ADMIN_PASS) {
-        const newImg = prompt("নতুন ইমেজের ডাইরেক্ট লিঙ্ক (Direct Link) দিন:", document.getElementById('adDisplayImg').src);
-        const newUrl = prompt("অ্যাডে ক্লিক করলে কোন লিঙ্কে যাবে? (URL দিন):", document.getElementById('adLink').href);
-
-        if (newImg && newUrl) {
-            db.ref('activeAd').set({
-                img: newImg,
-                link: newUrl
-            }).then(() => {
-                alert("অ্যাড ব্যানার সফলভাবে পরিবর্তন হয়েছে!");
-            }).catch(err => {
-                alert("এরর: " + err.message);
-            });
+        function secureAdUpdate() {
+            const pass = prompt("অ্যাডমিন পাসওয়ার্ড দিন:");
+            if (pass === ADMIN_PASS) {
+                const newImg = prompt("নতুন ইমেজের লিঙ্ক দিন:", document.getElementById('adDisplayImg').src);
+                const newUrl = prompt("অ্যাডের URL লিঙ্ক দিন:", document.getElementById('adLink').href);
+                if (newImg && newUrl) {
+                    db.ref('activeAd').set({ img: newImg, link: newUrl }).then(() => alert("অ্যাড পরিবর্তন হয়েছে!"));
+                }
+            } else { alert("ভুল পাসওয়ার্ড!"); }
         }
-    } else {
-        alert("ভুল পাসওয়ার্ড! আপনি অ্যাড পরিবর্তন করতে পারবেন না।");
-    }
-}
 
         function loadVideos() {
             db.ref('videos').on('value', snap => {
@@ -365,89 +380,45 @@ function secureAdUpdate() {
                     </div>`;
             });
         }
-function playVideo(id, title) {
-    // ১. ভিডিও ফ্রেম সেট করা (সরাসরি ইউটিউব এমবেড লিঙ্ক)
-    const frameContainer = document.getElementById('playerFrame');
-    frameContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" 
-        class="w-full h-full" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen></iframe>`;
 
-    // ২. টাইটেল সেট করা
-    document.getElementById('playingTitle').innerText = title;
-    
-    // ৩. কপি বাটনের লজিক
-    const fullLink = `https://www.youtube.com/watch?v=${id}`;
-    const copyBtn = document.getElementById('copyLinkBtn');
-    const btnText = document.getElementById('btnText');
-    const status = document.getElementById('copyStatus');
-    
-    copyBtn.onclick = function() {
-        // টেক্সট কপি করা
-        const el = document.createElement('textarea');
-        el.value = fullLink;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-
-        // ইউজারকে ফিডব্যাক দেওয়া
-        status.style.opacity = "1";
-        btnText.innerText = "Link Copied!";
-        copyBtn.classList.add('border-green-500');
-        
-        setTimeout(() => {
-            status.style.opacity = "0";
-            btnText.innerText = "Copy Video Link";
-            copyBtn.classList.remove('border-green-500');
-        }, 2000);
-    };
-
-    // ৪. হিস্ট্রি সেভ করা
-    if(currentUser) {
-        db.ref('history/' + currentUser.uid).push({ id, title, time: Date.now() });
-    }
-
-    // ৫. মোডাল ওপেন করা
-    toggleModal('playerModal');
-}
-
-        function loadHistory() {
-            if(!currentUser) return;
-            db.ref('history/' + currentUser.uid).limitToLast(10).on('value', snap => {
-                const data = snap.val(); let h = '';
-                if(data) Object.values(data).reverse().forEach(v => {
-                    h += `<div class="flex gap-3 bg-zinc-900 p-2 rounded-xl text-[11px] items-center"><img src="https://img.youtube.com/vi/${v.id}/default.jpg" class="w-16 rounded-lg"><div>${v.title}</div></div>`;
-                });
-                document.getElementById('historyList').innerHTML = h || 'কোন হিস্টরি নেই।';
-            });
+        function playVideo(id, title) {
+            const frameContainer = document.getElementById('playerFrame');
+            frameContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            document.getElementById('playingTitle').innerText = title;
+            const fullLink = `https://www.youtube.com/watch?v=${id}`;
+            const copyBtn = document.getElementById('copyLinkBtn');
+            const btnText = document.getElementById('btnText');
+            const status = document.getElementById('copyStatus');
+            copyBtn.onclick = function() {
+                const el = document.createElement('textarea');
+                el.value = fullLink; document.body.appendChild(el);
+                el.select(); document.execCommand('copy'); document.body.removeChild(el);
+                status.style.opacity = "1"; btnText.innerText = "Link Copied!";
+                setTimeout(() => { status.style.opacity = "0"; btnText.innerText = "Copy Video Link"; }, 2000);
+            };
+            toggleModal('playerModal');
         }
 
-        function deleteVideo(key) { if(confirm("ভিডিওটি মুছে ফেলবেন?")) db.ref('videos/' + key).remove(); }
+        function deleteVideo(key) { if(confirm("মুছে ফেলবেন?")) db.ref('videos/' + key).remove(); }
+        
         function addVideo() {
             const u = document.getElementById('ytUrl').value, t = document.getElementById('ytTitle').value, c = document.getElementById('ytCat').value, p = document.getElementById('uploadPass').value;
-            
-            if(p !== UPLOAD_PASS) {
-                alert("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।");
-                return;
-            }
-
+            if(p !== UPLOAD_PASS) return alert("ভুল পাসওয়ার্ড!");
             const id = u.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|\/embed\/|.*&v=))([^"&?\/\s]{11})/)?.[1];
             if(id && t) { 
-                db.ref('videos').push({ id, title: t, cat: c }); 
-                document.getElementById('uploadPass').value = ""; // clear pass
-                toggleModal('uploadModal'); 
+                db.ref('videos').push({ id, title: t, cat: c }).then(() => {
+                    document.getElementById('uploadPass').value = ""; toggleModal('uploadModal');
+                });
             }
         }
 
-        // Search & Voice
         function startVoiceSearch() {
             const rec = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
             rec.lang = 'bn-BD'; rec.onstart = () => document.getElementById('voiceBtn').classList.add('pulse');
             rec.onresult = (e) => { document.getElementById('globalSearch').value = e.results[0][0].transcript; searchVideos(); };
             rec.onend = () => document.getElementById('voiceBtn').classList.remove('pulse'); rec.start();
         }
+
         function searchVideos() { const q = document.getElementById('globalSearch').value.toLowerCase(); renderVideos(allVideos.filter(v => v.title.toLowerCase().includes(q))); }
         function filterCat(cat) { if(cat === 'All') renderVideos(allVideos); else renderVideos(allVideos.filter(v => v.cat === cat)); }
         function toggleFavorite(id) { const idx = favorites.indexOf(id); if(idx === -1) favorites.push(id); else favorites.splice(idx, 1); localStorage.setItem('sx_fav_slim', JSON.stringify(favorites)); renderVideos(allVideos); }
@@ -455,35 +426,15 @@ function playVideo(id, title) {
         function toggleModal(id) { document.getElementById(id).classList.toggle('active-modal'); }
         function closePlayer() { document.getElementById('playerFrame').innerHTML = ''; toggleModal('playerModal'); }
 
+        function redirectToDownload() {
+            const videoUrl = document.getElementById('directDlInput').value.trim();
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = videoUrl.match(regExp);
+            const videoId = (match && match[2].length == 11) ? match[2] : null;
+            if(videoId) { window.open(`https://www.ssyoutube.com/watch?v=${videoId}`, '_blank'); toggleModal('downloadModal'); document.getElementById('directDlInput').value = ""; }
+        }
+
         loadVideos();
-        // সরাসরি ডাউনলোড সাইটে লিঙ্কসহ পাঠানোর ফাংশন
-function redirectToDownload() {
-    const videoUrl = document.getElementById('directDlInput').value.trim();
-
-    if (!videoUrl || !videoUrl.includes('youtu')) {
-        alert("দয়া করে একটি সঠিক ইউটিউব ভিডিও লিঙ্ক দিন!");
-        return;
-    }
-
-    // ইউটিউব আইডি বের করার স্মার্ট পদ্ধতি
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    const match = videoUrl.match(regExp);
-    const videoId = (match && match[2].length == 11) ? match[2] : null;
-    
-    if(videoId) {
-        // এই লিঙ্কটি সরাসরি ssyoutube-এ আইডি পাঠিয়ে দেবে
-        const finalUrl = `https://www.ssyoutube.com/watch?v=${videoId}`;
-        
-        // নতুন উইন্ডোতে ওপেন হবে
-        window.open(finalUrl, '_blank');
-        
-        // মোডাল বন্ধ করা
-        toggleModal('downloadModal');
-        document.getElementById('directDlInput').value = "";
-    } else {
-        alert("ইউটিউব লিঙ্কটি সঠিক নয়! আবার ট্রাই করুন।");
-    }
-}
     </script>
-</body>      
+</body>
 </html>
